@@ -22,15 +22,21 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  static const int _colorRange = 256;
+  static const String _centeredTextValue = 'Hey there';
   Color _randomColor = Color(0xFFFFFFFF);
-  void setColor() {
+
+  void _setColor() {
     setState(() {
-      _randomColor = Color.fromARGB(Random().nextInt(256),
-          Random().nextInt(256), Random().nextInt(256), Random().nextInt(256));
+      _randomColor = Color.fromARGB(
+          Random().nextInt(_colorRange),
+          Random().nextInt(_colorRange),
+          Random().nextInt(_colorRange),
+          Random().nextInt(_colorRange));
     });
   }
 
-  Color selectTextColor(Color color) {
+  Color _selectTextColor(Color color) {
     return _randomColor.computeLuminance() > 0.5 ? Colors.black : Colors.white;
   }
 
@@ -39,12 +45,12 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       backgroundColor: _randomColor,
       body: InkWell(
-        onTap: setColor,
+        onTap: _setColor,
         child: Center(
           child: Text(
-            'Hey There',
+            _centeredTextValue,
             style: TextStyle(
-              color: selectTextColor(_randomColor),
+              color: _selectTextColor(_randomColor),
               fontWeight: FontWeight.bold,
               fontSize: 25,
             ),
